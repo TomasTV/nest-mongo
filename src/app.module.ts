@@ -1,0 +1,18 @@
+import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ProductsModule } from './products/products.module';
+require('dotenv').config()
+
+@Module({
+  imports: [ProductsModule, MongooseModule.forRoot(process.env.MONGO_DB)
+    // GraphQLModule.forRoot({
+    //   typePaths: ['./**/*.graphql'],
+    // })
+  ],
+  controllers: [AppController],
+  providers: [AppService]
+})
+export class AppModule { }
